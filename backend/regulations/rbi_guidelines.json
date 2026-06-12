@@ -1,0 +1,66 @@
+{
+  "name": "RBI Guidelines on Data Localisation and Payment Systems",
+  "short": "RBI",
+  "effective": "2018-04-06",
+  "jurisdiction": "India",
+  "key_provisions": [
+    {
+      "circular": "RBI/2017-18/153",
+      "topic": "data_localisation",
+      "requirement": "All data related to payment systems operated in India (including full end-to-end transaction details, payment credentials, account information) must be stored only in India. A copy may be maintained abroad for cross-border transactions but the data stored in foreign countries must be purged within 24 hours.",
+      "penalty": "Monetary penalty and licence revocation"
+    },
+    {
+      "circular": "RBI/2018-19/50",
+      "topic": "storage_of_card_data",
+      "requirement": "Storage of actual card data (card number, CVV, expiry date) is prohibited except by card networks under specific conditions. Tokenisation must be used. Merchants must not store actual card credentials post-transaction.",
+      "penalty": "Monetary penalty and revocation of payment aggregator licence"
+    },
+    {
+      "circular": "RBI/2020-21/221",
+      "topic": "payment_aggregators",
+      "requirement": "Payment aggregators must: (a) be registered with RBI; (b) comply with data localisation requirements; (c) maintain escrow accounts; (d) ensure merchant due diligence; (e) implement information security policy including PCI-DSS compliance.",
+      "penalty": "Monetary penalty up to INR 1 crore per instance"
+    },
+    {
+      "circular": "RBI/2021-22/91",
+      "topic": "recurring_payments",
+      "requirement": "Recurring transactions (subscriptions, EMIs) must use an Additional Factor of Authentication (AFA) for the first transaction. Pre-debit notification must be sent to customer at least 24 hours before recurring debit. Customer must have the right to opt out or cancel at any time.",
+      "penalty": "Monetary penalty and processing suspension"
+    },
+    {
+      "circular": "RBI/2022-23/75",
+      "topic": "digital_lending",
+      "requirement": "Loan disbursement must be directly to bank account of borrower — not to third-party accounts. Collection must be from borrower directly. No automatic increase in credit limit without explicit borrower consent. Key Fact Statement (KFS) must be provided before loan execution.",
+      "penalty": "Cancellation of NBFC licence"
+    },
+    {
+      "circular": "RBI/2019-20/180",
+      "topic": "outsourcing",
+      "requirement": "Banks outsourcing IT or payment functions must: (a) retain ultimate responsibility for compliance; (b) ensure the service provider maintains data only in India; (c) include RBI audit rights in contracts; (d) maintain an exit strategy.",
+      "penalty": "Monetary penalty and supervisory action"
+    },
+    {
+      "circular": "RBI/2015-16/418",
+      "topic": "cyber_security",
+      "requirement": "Banks and regulated entities must implement a board-approved Cyber Security Policy. Incident reporting to RBI required within 6 hours for cybersecurity incidents. IT systems must be audited by CERT-In empanelled auditors annually.",
+      "penalty": "Monetary penalty up to INR 1 crore per instance"
+    },
+    {
+      "circular": "RBI/2016-17/83",
+      "topic": "customer_rights",
+      "requirement": "Zero liability on customer for unauthorised transactions reported within 3 working days. Limited liability for delays in reporting based on negligence. Banks cannot force arbitration for customer grievances — Banking Ombudsman access must be preserved.",
+      "penalty": "RBI directive and public disclosure"
+    }
+  ],
+  "high_risk_clause_patterns": [
+    "storage of payment data outside India",
+    "unlimited auto-debit without prior notice",
+    "waiver of right to dispute transactions",
+    "mandatory arbitration for financial disputes",
+    "sharing payment credentials with unnamed third parties",
+    "no cap on liability for bank errors",
+    "auto-renewal without explicit consent",
+    "data retention beyond transaction necessity"
+  ]
+}

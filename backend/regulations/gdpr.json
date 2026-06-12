@@ -1,0 +1,90 @@
+{
+  "name": "General Data Protection Regulation",
+  "short": "GDPR",
+  "effective": "2018-05-25",
+  "jurisdiction": "European Union",
+  "key_provisions": [
+    {
+      "article": "5",
+      "topic": "principles",
+      "requirement": "Personal data must be: (a) processed lawfully, fairly, transparently; (b) collected for specified, explicit, legitimate purposes; (c) adequate, relevant, limited to what is necessary; (d) accurate; (e) stored no longer than necessary; (f) processed securely.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "6",
+      "topic": "lawful_basis",
+      "requirement": "Processing requires one of: explicit consent, performance of contract, legal obligation, vital interests, public task, or legitimate interests (which must not override data subject rights).",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "7",
+      "topic": "conditions_for_consent",
+      "requirement": "Consent must be freely given, specific, informed, and unambiguous. Pre-ticked boxes or bundled consent is invalid. Withdrawal of consent must be as easy as giving it.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "13-14",
+      "topic": "transparency",
+      "requirement": "Data subjects must be informed at time of collection: identity of controller, purposes and legal basis, recipients, retention period, rights available, and whether transfers occur outside EEA.",
+      "penalty": "Up to €10 million or 2% global annual turnover"
+    },
+    {
+      "article": "17",
+      "topic": "right_to_erasure",
+      "requirement": "Data subjects have the right to erasure ('right to be forgotten') when data is no longer necessary, consent is withdrawn, processing is unlawful, or a legal obligation requires erasure.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "20",
+      "topic": "data_portability",
+      "requirement": "Data subjects have the right to receive their personal data in a structured, commonly used, machine-readable format, and to transmit it to another controller.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "25",
+      "topic": "privacy_by_design",
+      "requirement": "Data protection must be integrated into processing activities from the outset (privacy by design) and by default, only the minimum necessary data should be processed.",
+      "penalty": "Up to €10 million or 2% global annual turnover"
+    },
+    {
+      "article": "28",
+      "topic": "data_processors",
+      "requirement": "Controllers must only use processors that provide sufficient guarantees. Processing by a processor must be governed by a binding contract specifying subject matter, duration, nature, purpose, and obligations.",
+      "penalty": "Up to €10 million or 2% global annual turnover"
+    },
+    {
+      "article": "32",
+      "topic": "security",
+      "requirement": "Controllers and processors must implement appropriate technical and organisational measures to ensure security appropriate to the risk, including encryption, pseudonymisation, and resilience of systems.",
+      "penalty": "Up to €10 million or 2% global annual turnover"
+    },
+    {
+      "article": "33",
+      "topic": "breach_notification",
+      "requirement": "Personal data breaches must be reported to the supervisory authority within 72 hours of becoming aware. Breaches likely to result in high risk must also be communicated to data subjects without undue delay.",
+      "penalty": "Up to €10 million or 2% global annual turnover"
+    },
+    {
+      "article": "44-49",
+      "topic": "international_transfers",
+      "requirement": "Transfers to third countries are permitted only when: the country provides adequate protection (adequacy decision), appropriate safeguards exist (SCCs, BCRs), or specific derogations apply.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    },
+    {
+      "article": "82-83",
+      "topic": "liability_fines",
+      "requirement": "Both controllers and processors are jointly and severally liable for damages. Administrative fines up to €20 million or 4% of global annual turnover for serious infringements.",
+      "penalty": "Up to €20 million or 4% global annual turnover"
+    }
+  ],
+  "high_risk_clause_patterns": [
+    "unlimited data sharing without legal basis",
+    "no mention of data retention period",
+    "transfer to non-adequate countries without safeguards",
+    "no right to erasure or portability",
+    "bundled or implied consent",
+    "no breach notification obligation",
+    "unlimited sub-processing chain",
+    "exclusion of data subject rights"
+  ]
+}

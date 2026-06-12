@@ -1,0 +1,90 @@
+{
+  "name": "Digital Personal Data Protection Act 2023",
+  "short": "DPDP_2023",
+  "effective": "2023-08-11",
+  "jurisdiction": "India",
+  "key_provisions": [
+    {
+      "section": "4",
+      "topic": "lawful_processing",
+      "requirement": "Personal data may be processed only for a lawful purpose for which the Data Principal has given consent, or for certain legitimate uses specified under the Act.",
+      "penalty": "Up to INR 50 crore"
+    },
+    {
+      "section": "6",
+      "topic": "consent",
+      "requirement": "Consent must be free, specific, informed, unconditional, and unambiguous. Bundled consent (consent coupled with other terms as a condition of service) is not permitted. Consent request must be presented in clear plain language with a standalone option to withdraw.",
+      "penalty": "Up to INR 50 crore"
+    },
+    {
+      "section": "7",
+      "topic": "legitimate_uses",
+      "requirement": "Processing without consent is permissible only for: state functions, legal obligations, medical emergencies, employment purposes, or public interest — and only to the extent necessary.",
+      "penalty": "Up to INR 50 crore"
+    },
+    {
+      "section": "8",
+      "topic": "obligations_of_data_fiduciary",
+      "requirement": "Data fiduciary must: (a) ensure accuracy and completeness of personal data; (b) implement technical and organisational measures; (c) not retain data beyond the necessary period; (d) implement Data Retention Policy with defined timelines.",
+      "penalty": "Up to INR 250 crore"
+    },
+    {
+      "section": "8(2)",
+      "topic": "sub_processing",
+      "requirement": "Data fiduciary cannot delegate processing responsibilities to sub-processors without explicit written consent from the Data Principal and binding contractual obligations on the sub-processor that are equivalent to those imposed on the fiduciary.",
+      "penalty": "Up to INR 250 crore"
+    },
+    {
+      "section": "9",
+      "topic": "processing_children_data",
+      "requirement": "Processing of personal data of children (under 18) requires verifiable parental consent. Data fiduciary must not undertake tracking, behavioural monitoring, or targeted advertising directed at children.",
+      "penalty": "Up to INR 200 crore"
+    },
+    {
+      "section": "11",
+      "topic": "right_to_information",
+      "requirement": "Data Principal has the right to obtain a summary of personal data processed and the identities of all Data Processors and third parties with whom the data has been shared.",
+      "penalty": "Up to INR 10 crore"
+    },
+    {
+      "section": "12",
+      "topic": "right_to_correction_erasure",
+      "requirement": "Data Principal has the right to correct inaccurate or misleading personal data, complete incomplete data, update outdated data, and erase data no longer necessary for the stated purpose.",
+      "penalty": "Up to INR 10 crore"
+    },
+    {
+      "section": "13",
+      "topic": "right_to_grievance_redressal",
+      "requirement": "Data Principal has the right to have grievances redressed. Data fiduciary must publish contact details of a Data Protection Officer or an authorised person, and respond to grievances within a prescribed period.",
+      "penalty": "Up to INR 10 crore"
+    },
+    {
+      "section": "16",
+      "topic": "significant_data_fiduciary",
+      "requirement": "Entities designated as Significant Data Fiduciaries must appoint an Indian-resident Data Protection Officer, conduct periodic Data Protection Impact Assessments, and audit their algorithms for potential harm.",
+      "penalty": "Up to INR 250 crore"
+    },
+    {
+      "section": "17",
+      "topic": "cross_border_transfer",
+      "requirement": "Transfer of personal data outside India is permitted only to countries notified by the Central Government. Contracts must ensure equivalent protection standards.",
+      "penalty": "Up to INR 250 crore"
+    },
+    {
+      "section": "40",
+      "topic": "breach_notification",
+      "requirement": "Data fiduciary must notify the Data Protection Board and affected Data Principals of any personal data breach in the prescribed form and within the prescribed timeline.",
+      "penalty": "Up to INR 250 crore"
+    }
+  ],
+  "high_risk_clause_patterns": [
+    "unlimited data sharing with third parties",
+    "no data retention limit",
+    "bundled consent to multiple purposes",
+    "waiver of right to erasure",
+    "sub-processing without named processors",
+    "data transfer to unspecified countries",
+    "no breach notification obligation",
+    "unilateral modification of privacy terms"
+  ]
+}
