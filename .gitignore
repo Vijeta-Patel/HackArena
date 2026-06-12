@@ -82,3 +82,6 @@ client_secret.json
 oauth.json
 *.p12
 *.pfx
+
+# Test files
+test_tos.html
