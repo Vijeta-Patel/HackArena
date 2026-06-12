@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "LexGuard — Contract Risk Scanner",
+  "name": "Caveat — Contract Risk Scanner",
   "version": "1.0.0",
   "description": "Instantly detect hidden risks, dark patterns, and regulatory violations in any contract or Terms of Service page.",
 
@@ -24,7 +24,7 @@
 
   "action": {
     "default_popup": "sidebar/sidebar.html",
-    "default_title": "LexGuard — Scan this page",
+    "default_title": "Caveat — Scan this page",
     "default_icon": {
       "16":  "icons/icon16.png",
       "48":  "icons/icon48.png",

@@ -95,8 +95,8 @@ function ClauseCard({ clause }: { clause: JobResult["clauses"][0] }) {
 
 function UploadZone({ onJobStart }: { onJobStart: (id: string) => void }) {
   const [files, setFiles] = useState<File[]>([]);
-  const [orgId, setOrgId] = useState("");
-  const [projectId, setProjectId] = useState("");
+  const [orgId, setOrgId] = useState("demo-org");
+  const [projectId, setProjectId] = useState("demo-project");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -357,7 +357,7 @@ function RiskReport({ result }: { result: JobResult }) {
           }}>
             {t === "flags" ? "Hist. Flags" : t}
             <span style={{ marginLeft: "8px", opacity: 0.8 }}>
-              {t === "clauses" ? result.clauses.length : t === "contradictions" ? result.contradictions.length : result.historical_flags.length}
+              {t === "clauses" ? (result.clauses || []).length : t === "contradictions" ? (result.contradictions || []).length : (result.historical_flags || []).length}
             </span>
           </button>
         ))}
@@ -366,7 +366,7 @@ function RiskReport({ result }: { result: JobResult }) {
       {tab === "clauses" && (
         <div>
           {(["violation","high","medium","low","compliant"] as const).map(level => {
-            const clauses = result.clauses.filter(c => c.risk_level === level);
+            const clauses = (result.clauses || []).filter(c => c.risk_level === level);
             if (!clauses.length) return null;
             return (
               <div key={level} style={{ marginBottom: "32px" }}>
@@ -383,12 +383,12 @@ function RiskReport({ result }: { result: JobResult }) {
 
       {tab === "contradictions" && (
         <div>
-          {result.contradictions.length === 0 ? (
+          {(result.contradictions || []).length === 0 ? (
             <div style={{ padding: "60px", textAlign: "center", border: "2px solid #111111" }}>
               <CheckCircle2 size={48} color="#111111" style={{ margin: "0 auto 16px" }} />
               <p style={{ color: "#111111", fontWeight: "bold", fontSize: "16px", textTransform: "uppercase" }}>No contradictions detected.</p>
             </div>
-          ) : result.contradictions.map((c, i) => (
+          ) : (result.contradictions || []).map((c, i) => (
             <div key={i} style={{ padding: "24px", marginBottom: "16px", border: "2px solid #111111", boxShadow: "4px 4px 0 #111111" }}>
               <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
                 <AlertTriangle size={20} color="#ff8c42" strokeWidth={3} />
@@ -410,12 +410,12 @@ function RiskReport({ result }: { result: JobResult }) {
 
       {tab === "flags" && (
         <div>
-          {result.historical_flags.length === 0 ? (
+          {(result.historical_flags || []).length === 0 ? (
             <div style={{ padding: "60px", textAlign: "center", border: "2px solid #111111" }}>
               <ShieldAlert size={48} color="#111111" style={{ margin: "0 auto 16px" }} />
               <p style={{ color: "#111111", fontWeight: "bold", fontSize: "16px", textTransform: "uppercase" }}>No historical flags found.</p>
             </div>
-          ) : result.historical_flags.map((f, i) => (
+          ) : (result.historical_flags || []).map((f, i) => (
             <div key={i} style={{ padding: "24px", marginBottom: "16px", border: "2px solid #111111", boxShadow: "4px 4px 0 #111111" }}>
               <div style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
                 <Info size={18} color="#111111" strokeWidth={3} />
@@ -442,8 +442,8 @@ export default function EnterprisePage() {
   // Chat State — auto-sync from completed job so no hardcoded defaults
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [chatOrgId, setChatOrgId] = useState(jobResult?.org_id ?? "");
-  const [chatProjectId, setChatProjectId] = useState(jobResult?.project_id ?? "");
+  const [chatOrgId, setChatOrgId] = useState(jobResult?.org_id ?? "demo-org");
+  const [chatProjectId, setChatProjectId] = useState(jobResult?.project_id ?? "demo-project");
   const [projectDocs, setProjectDocs] = useState<{filename: string, job_id: string, created_at: string, tier: string}[]>([]);
   const [loadingDocs, setLoadingDocs] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);

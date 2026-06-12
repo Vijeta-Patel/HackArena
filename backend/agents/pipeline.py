@@ -33,6 +33,7 @@ class PipelineState(TypedDict):
     org_id: str
     project_id: str
     file_path: str
+    original_filename: str
 
     # Agent outputs (populated by each agent in turn)
     raw_text: str                           # set by agent_extractor

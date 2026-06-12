@@ -151,7 +151,7 @@ export default function Home() {
                   <h3 className="font-display" style={{ fontSize: "clamp(48px, 5vw, 64px)", color: "var(--accent)", lineHeight: 0.9 }}>{card.title}</h3>
                 </div>
                 <p style={{ fontSize: "16px", lineHeight: "1.6", color: "var(--text-body)", flex: 1, fontWeight: 500 }}>{card.desc}</p>
-                <a href={card.href} download={card.href === "/extension.zip" ? "LexGuard-Extension.zip" : undefined} style={{ alignSelf: "flex-start", textDecoration: "none" }}>
+                <a href={card.href} download={card.href === "/extension.zip" ? "Caveat-Extension.zip" : undefined} style={{ alignSelf: "flex-start", textDecoration: "none" }}>
                   <button style={{ 
                     fontSize: "14px", fontWeight: 800, padding: "16px 28px", 
                     background: "var(--bg)", color: "var(--accent)", 

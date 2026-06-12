@@ -68,7 +68,7 @@ export default function Navbar() {
       </div>
 
       {/* CTA */}
-      <a href="/extension.zip" download="LexGuard-Extension.zip">
+      <a href="/extension.zip" download="Caveat-Extension.zip">
         <button
           className="btn-primary"
           style={{ fontSize: "13px", padding: "10px 22px", display: "flex", alignItems: "center", gap: "8px" }}
