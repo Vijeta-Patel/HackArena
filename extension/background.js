@@ -1,5 +1,5 @@
 /**
- * LexGuard Background Service Worker (Manifest V3)
+ * Caveat Background Service Worker (Manifest V3)
  *
  * Handles:
  *  - Prescan API calls (called by content.js via message passing)

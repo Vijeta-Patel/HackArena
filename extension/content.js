@@ -1,5 +1,5 @@
 /**
- * LexGuard Content Script
+ * Caveat Content Script
  * Runs on every page at document_idle.
  *
  * Responsibilities:
@@ -59,7 +59,7 @@
    * Called by popup (via chrome.scripting.executeScript) to get full page text
    * for the deep analysis endpoint.
    */
-  window.__lexguardExtractText = function (charLimit = 40000) {
+  window.__caveatExtractText = function (charLimit = 40000) {
     return extractPageText(charLimit);
   };
 

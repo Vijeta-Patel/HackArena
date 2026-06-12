@@ -17,6 +17,12 @@ export const metadata: Metadata = {
   title: "Caveat — The fine print, finally",
   description:
     "Caveat automates enterprise contract compliance and lets every Indian understand what they're signing — in their language, from a phone photo.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Caveat — The fine print, finally",
     description: "The fine print, finally. 7-agent AI pipeline. Multilingual. Real-time.",
