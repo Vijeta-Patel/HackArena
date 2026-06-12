@@ -220,3 +220,31 @@ async def list_projects(org_id: str):
     ]
 
     return JSONResponse({"org_id": org_id, "projects": projects})
+
+
+# -----------------------------------------------------------------------
+# GET /api/enterprise/projects/{org_id}/{project_id}/documents — list documents
+# -----------------------------------------------------------------------
+@router.get("/projects/{org_id}/{project_id}/documents")
+async def list_project_documents(org_id: str, project_id: str):
+    from sqlalchemy import select
+    from db.models import Document
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(
+            select(Document)
+            .where(Document.org_id == org_id)
+            .where(Document.project_id == project_id)
+            .order_by(Document.created_at.desc())
+        )
+        docs = result.scalars().all()
+
+    docs_list = [
+        {
+            "job_id": doc.job_id,
+            "filename": doc.filename,
+            "status": doc.status,
+            "created_at": doc.created_at.isoformat() if doc.created_at else None,
+        }
+        for doc in docs
+    ]
+    return JSONResponse({"org_id": org_id, "project_id": project_id, "documents": docs_list})

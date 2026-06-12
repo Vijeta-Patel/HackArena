@@ -46,6 +46,12 @@
       <button class="btn btn-primary w-full" onclick="clearChat()" style="justify-content:center;">🗑️ Clear Chat</button>
 
       <hr class="divider">
+      <h3 class="mb-12" style="font-size:0.875rem;">Project Documents</h3>
+      <div id="project-documents-list" style="display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto;font-size:0.8rem;color:var(--text-2);">
+        <!-- Populated by JS -->
+      </div>
+
+      <hr class="divider">
       <h3 class="mb-12" style="font-size:0.875rem;">Suggested Questions</h3>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <button class="btn btn-ghost btn-sm" style="text-align:left;white-space:normal;height:auto;line-height:1.5;" onclick="ask('What clauses pose the highest regulatory risk?')">What clauses pose the highest regulatory risk?</button>
@@ -84,6 +90,45 @@
     document.getElementById('chat-input').value = q;
     sendMessage();
   }
+
+  async function fetchProjectDocuments() {
+    const orgId  = document.getElementById('c-org').value.trim();
+    const projId = document.getElementById('c-proj').value.trim();
+    if (!orgId || !projId) return;
+
+    const listEl = document.getElementById('project-documents-list');
+    listEl.innerHTML = '<div style="color:var(--text-3)">Loading documents...</div>';
+
+    try {
+      const resp = await fetch(`${API}/api/enterprise/projects/${orgId}/${projId}/documents`);
+      if (!resp.ok) throw new Error('Failed to fetch');
+      const data = await resp.json();
+      
+      if (!data.documents || data.documents.length === 0) {
+        listEl.innerHTML = '<div style="color:var(--text-3); font-style:italic;">No documents uploaded yet.</div>';
+        return;
+      }
+
+      listEl.innerHTML = data.documents.map(doc => {
+        const date = doc.created_at ? new Date(doc.created_at).toLocaleDateString(undefined, {month:'short', day:'numeric'}) : '';
+        const icon = doc.status === 'complete' ? '📄' : doc.status === 'error' ? '❌' : '⏳';
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding: 6px; background: rgba(255,255,255,0.03); border-radius: 4px; border: 1px solid var(--border-1);">
+            <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:140px; font-weight:500;" title="${escHtml(doc.filename)}">
+              ${icon} ${escHtml(doc.filename)}
+            </div>
+            <div style="color:var(--text-3); font-size:0.7rem;">${date}</div>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      listEl.innerHTML = '<div style="color:var(--violation)">Error loading documents.</div>';
+    }
+  }
+
+  // Hook up event listeners to auto-refresh Document Explorer
+  document.getElementById('c-org').addEventListener('change', fetchProjectDocuments);
+  document.getElementById('c-proj').addEventListener('change', fetchProjectDocuments);
 
   async function sendMessage() {
     const input = document.getElementById('chat-input');
@@ -173,6 +218,9 @@
   function escHtml(s) {
     return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
   }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', fetchProjectDocuments);
 </script>
 </body>
 </html>
