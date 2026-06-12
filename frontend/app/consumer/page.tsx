@@ -25,7 +25,7 @@ const RISK_COLOR: Record<string, string> = {
 
 function FlaggedClauseCard({ clause, idx }: { clause: FlaggedClause; idx: number }) {
   const [open, setOpen] = useState(false);
-  const lvl = clause.risk_level || "low";
+  const lvl = (clause.risk_level || "low").toLowerCase();
   return (
     <div style={{ border: "2px solid #111111", marginBottom: "12px", boxShadow: "4px 4px 0 #111111", background: "var(--bg)" }}>
       <button style={{ width: "100%", display: "flex", gap: "12px", padding: "18px 20px", textAlign: "left", background: "none", border: "none", cursor: "pointer", alignItems: "flex-start" }}
@@ -88,9 +88,9 @@ function ConsumerReport({ analysis, onReset }: { analysis: ConsumerAnalysis; onR
   const score = analysis.overall_risk_score || 0;
   const scoreColor = score >= 70 ? "#ff4d4d" : score >= 40 ? "#ff8c42" : "#42ffa1";
   const clauses = analysis.flagged_clauses || [];
-  const shown = filter === "all" ? clauses : clauses.filter(c => c.risk_level === filter);
+  const shown = filter === "all" ? clauses : clauses.filter(c => (c.risk_level || "low").toLowerCase() === filter);
   const riskOrder: Record<string, number> = { violation: 0, high: 1, medium: 2, low: 3, compliant: 4 };
-  shown.sort((a, b) => (riskOrder[a.risk_level] ?? 5) - (riskOrder[b.risk_level] ?? 5));
+  shown.sort((a, b) => (riskOrder[(a.risk_level || "low").toLowerCase()] ?? 5) - (riskOrder[(b.risk_level || "low").toLowerCase()] ?? 5));
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -121,8 +121,8 @@ function ConsumerReport({ analysis, onReset }: { analysis: ConsumerAnalysis; onR
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
             {[
               { label: "Document Type", val: (analysis.document_type || "unknown").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()) },
-              { label: "Red Flags", val: analysis.red_flags_count ?? 0, color: "#ff4d4d" },
-              { label: "Dark Patterns", val: analysis.dark_patterns_count ?? 0, color: "#EC4899" },
+              { label: "Red Flags", val: analysis.red_flags_count ?? clauses.filter(c => (c.risk_level || '').toLowerCase() === 'violation').length, color: "#ff4d4d" },
+              { label: "Dark Patterns", val: analysis.dark_patterns_count ?? clauses.filter(c => c.dark_pattern).length, color: "#EC4899" },
               { label: "Total Clauses", val: clauses.length },
             ].map((m, i) => (
               <div key={i} style={{ padding: "14px", border: "2px solid #111111", background: "var(--bg)" }}>

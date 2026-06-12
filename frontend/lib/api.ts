@@ -108,3 +108,14 @@ export async function ragChat(
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
+
+export async function getProjectDocuments(orgId: string, projectId: string) {
+  const res = await fetch(`${API_BASE}/api/enterprise/projects/${orgId}/${projectId}/documents`);
+  if (!res.ok) {
+    const text = await res.text();
+    let msg = text;
+    try { msg = JSON.parse(text).detail || text; } catch { /* ignore */ }
+    throw new Error(msg);
+  }
+  return res.json();
+}

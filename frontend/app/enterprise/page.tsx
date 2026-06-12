@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useStore, PipelineEvent, JobResult } from "@/store/useStore";
-import { uploadEnterprise, getJobResult, ragChat } from "@/lib/api";
+import { uploadEnterprise, getJobResult, ragChat, getProjectDocuments } from "@/lib/api";
 import { subscribeToJob } from "@/lib/sse";
 
 const STEPS = [
@@ -444,6 +444,8 @@ export default function EnterprisePage() {
   const [loading, setLoading] = useState(false);
   const [chatOrgId, setChatOrgId] = useState(jobResult?.org_id ?? "");
   const [chatProjectId, setChatProjectId] = useState(jobResult?.project_id ?? "");
+  const [projectDocs, setProjectDocs] = useState<{filename: string, job_id: string, created_at: string, tier: string}[]>([]);
+  const [loadingDocs, setLoadingDocs] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   // Keep chat org/project in sync when a new job completes
@@ -451,6 +453,15 @@ export default function EnterprisePage() {
     if (jobResult?.org_id)    setChatOrgId(jobResult.org_id);
     if (jobResult?.project_id) setChatProjectId(jobResult.project_id);
   }, [jobResult]);
+
+  useEffect(() => {
+    if (!chatOrgId || !chatProjectId) return;
+    setLoadingDocs(true);
+    getProjectDocuments(chatOrgId, chatProjectId)
+      .then(res => setProjectDocs(res.documents || []))
+      .catch(() => setProjectDocs([]))
+      .finally(() => setLoadingDocs(false));
+  }, [chatOrgId, chatProjectId, jobResult]);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [chatHistory, loading]);
 
@@ -525,6 +536,38 @@ export default function EnterprisePage() {
               )}
             </div>
           </div>
+
+          <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+            {/* Project Documents Sidebar */}
+            <div style={{ width: "260px", borderRight: "4px solid #111111", background: "var(--bg)", display: "flex", flexDirection: "column" }}>
+              <div style={{ padding: "16px", borderBottom: "2px solid #111111", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span style={{ fontSize: "12px", fontWeight: 900, letterSpacing: "0.08em", color: "#111111" }}>PROJECT DOCS</span>
+                <span style={{ fontSize: "11px", fontWeight: 800, padding: "2px 6px", background: "#111111", color: "#fff" }}>{projectDocs.length}</span>
+              </div>
+              <div style={{ flex: 1, overflowY: "auto", padding: "12px" }}>
+                {loadingDocs ? (
+                  <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}><Loader2 size={20} className="anim-spin" color="#111111" /></div>
+                ) : projectDocs.length === 0 ? (
+                  <div style={{ fontSize: "13px", color: "var(--text-body)", fontWeight: 600, textAlign: "center", padding: "20px 0" }}>No documents found</div>
+                ) : (
+                  projectDocs.map((doc, idx) => (
+                    <div key={idx} style={{ padding: "12px", marginBottom: "8px", border: "2px solid #111111", background: "rgba(17,17,17,0.02)" }}>
+                      <div style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: "8px" }}>
+                        <FileText size={14} color="#111111" strokeWidth={2.5} style={{ flexShrink: 0, marginTop: "2px" }} />
+                        <span style={{ fontSize: "13px", fontWeight: 800, color: "#111111", wordBreak: "break-all", lineHeight: 1.3 }}>{doc.filename}</span>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--text-body)", textTransform: "uppercase" }}>{new Date(doc.created_at).toLocaleDateString()}</span>
+                        {doc.tier && <span style={{ fontSize: "10px", fontWeight: 800, padding: "2px 6px", background: "var(--accent)", color: "#111111", textTransform: "uppercase" }}>{doc.tier}</span>}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* Chat Area */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
 
           <div style={{ flex: 1, overflowY: "auto", padding: "40px", display: "flex", flexDirection: "column", gap: "32px" }}>
             {chatHistory.length === 0 && (
@@ -619,6 +662,8 @@ export default function EnterprisePage() {
                 {loading ? <Loader2 size={18} className="anim-spin" /> : <Send size={18} strokeWidth={3} />}
                 Send
               </button>
+            </div>
+          </div>
             </div>
           </div>
         </div>
