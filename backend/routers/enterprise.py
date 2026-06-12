@@ -68,6 +68,7 @@ async def upload_contract(
         org_id=org_id,
         project_id=project_id,
         file_path=str(upload_path),
+        original_filename=file.filename or "contract.pdf",
     )
 
     return JSONResponse(
@@ -80,7 +81,7 @@ async def upload_contract(
     )
 
 
-async def _run_pipeline(job_id: str, org_id: str, project_id: str, file_path: str):
+async def _run_pipeline(job_id: str, org_id: str, project_id: str, file_path: str, original_filename: str):
     """Background task: run the full LangGraph enterprise pipeline."""
     # Import here to avoid circular imports at module level
     from agents.pipeline import pipeline
@@ -90,6 +91,7 @@ async def _run_pipeline(job_id: str, org_id: str, project_id: str, file_path: st
         "org_id":          org_id,
         "project_id":      project_id,
         "file_path":       file_path,
+        "original_filename": original_filename,
         "raw_text":        "",
         "clause_manifest": [],
         "regulation_corpus": {},

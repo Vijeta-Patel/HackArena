@@ -23,6 +23,7 @@ async def agent_ingestor(state: dict) -> dict:
     org_id    = state["org_id"]
     project_id = state["project_id"]
     file_path  = state["file_path"]
+    original_filename = state.get("original_filename", Path(file_path).name)
 
     logger.info(f"[Agent 1 — Ingestor] job={job_id} file={file_path}")
 
@@ -59,7 +60,7 @@ async def agent_ingestor(state: dict) -> dict:
                 job_id=job_id,
                 org_id=org_id,
                 project_id=project_id,
-                filename=path.name,
+                filename=original_filename,
                 file_hash=file_hash,
                 tier="enterprise",
             )
@@ -68,7 +69,7 @@ async def agent_ingestor(state: dict) -> dict:
         await push_event(job_id, {
             "event": "ingest_complete",
             "job_id": job_id,
-            "filename": path.name,
+            "filename": original_filename,
             "file_hash": file_hash,
             "timestamp": datetime.datetime.utcnow().isoformat(),
         })
