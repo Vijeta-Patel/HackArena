@@ -68,14 +68,14 @@ export default function Navbar() {
       </div>
 
       {/* CTA */}
-      <Link href="https://github.com/vijeta-patel/HackArena" target="_blank">
+      <a href="/extension.zip" download="LexGuard-Extension.zip">
         <button
           className="btn-primary"
           style={{ fontSize: "13px", padding: "10px 22px", display: "flex", alignItems: "center", gap: "8px" }}
         >
           <ExternalLink size={14} /> Extension
         </button>
-      </Link>
+      </a>
     </nav>
   );
 }

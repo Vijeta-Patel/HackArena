@@ -131,7 +131,7 @@ export default function Home() {
             {[
               { icon: Building2, label: "Enterprise", title: "Pipeline", desc: "7-agent LangGraph orchestration. Risk classification, redlining, GitHub PR, Slack alerts — all under 45 seconds.", href: "/enterprise", cta: "Open Dashboard" },
               { icon: User, label: "Consumer", title: "Clarity", desc: "Photograph a physical document. Plain-language breakdown in Hindi, Kannada, Tamil, Telugu or 5 more languages.", href: "/consumer", cta: "Try It Free" },
-              { icon: Puzzle, label: "Browser", title: "Extension", desc: "MutationObserver detects every ToS wall. Icon glows amber → red. Sidebar analysis without leaving the page.", href: "#extension", cta: "Learn More" },
+              { icon: Puzzle, label: "Browser", title: "Extension", desc: "MutationObserver detects every ToS wall. Icon glows amber → red. Sidebar analysis without leaving the page.", href: "/extension.zip", cta: "Download Extension" },
             ].map((card, i) => (
               <div key={i} style={{ 
                 padding: "48px 40px", 
@@ -151,7 +151,7 @@ export default function Home() {
                   <h3 className="font-display" style={{ fontSize: "clamp(48px, 5vw, 64px)", color: "var(--accent)", lineHeight: 0.9 }}>{card.title}</h3>
                 </div>
                 <p style={{ fontSize: "16px", lineHeight: "1.6", color: "var(--text-body)", flex: 1, fontWeight: 500 }}>{card.desc}</p>
-                <Link href={card.href} style={{ alignSelf: "flex-start" }}>
+                <a href={card.href} download={card.href === "/extension.zip" ? "LexGuard-Extension.zip" : undefined} style={{ alignSelf: "flex-start", textDecoration: "none" }}>
                   <button style={{ 
                     fontSize: "14px", fontWeight: 800, padding: "16px 28px", 
                     background: "var(--bg)", color: "var(--accent)", 
@@ -160,7 +160,7 @@ export default function Home() {
                   }}>
                     {card.cta} <ArrowRight size={16} strokeWidth={3} />
                   </button>
-                </Link>
+                </a>
               </div>
             ))}
           </div>
@@ -308,7 +308,7 @@ export default function Home() {
               </p>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignContent: "flex-start" }}>
-              {[["हिंदी", true],["ಕನ್ನಡ", true],["தமிழ்", true],["తెలుగు", true],["മലയാളം", true],["বাংলা", true],["English", false],["Marathi", false]].map(([lang, isIndian], i) => (
+              {[["हिंदी", true],["ಕನ್ನಡ", true],["தமிழ்", true],["తెలుగు", true],["മലയാളം", true],["বাংলা", true],["English", true],["मराठी", true]].map(([lang, isIndian], i) => (
                 <div key={i} style={{ 
                   padding: "16px 28px", fontSize: "18px", fontWeight: 800, textTransform: "uppercase",
                   background: isIndian ? "var(--accent)" : "transparent", 
@@ -339,9 +339,9 @@ export default function Home() {
                   <User size={18} strokeWidth={3} /> Consumer Tool
                 </button>
               </Link>
-              <Link href="#extension">
+              <Link href="/extension.zip">
                 <button style={{ padding: "16px 32px", background: "transparent", color: "#ffffff", border: "3px solid rgba(255,255,255,0.3)", fontSize: "14px", fontWeight: 900, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: "10px" }}>
-                  <Puzzle size={18} strokeWidth={3} /> Web Extension
+                  <Puzzle size={18} strokeWidth={3} /> Download Extension
                 </button>
               </Link>
             </div>

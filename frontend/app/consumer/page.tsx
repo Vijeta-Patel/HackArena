@@ -241,7 +241,7 @@ export default function ConsumerPage() {
     accept: mode === "photo"
       ? { "image/jpeg": [".jpg", ".jpeg"], "image/png": [".png"], "image/webp": [".webp"] }
       : { "application/pdf": [".pdf"], "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"] },
-    multiple: mode !== "photo",
+    multiple: true,
     disabled: mode === "text",
   });
 
